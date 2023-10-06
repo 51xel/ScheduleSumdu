@@ -1,10 +1,8 @@
-html {
-  font-size: 14px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;200;300;400;500;600;800;900&display=swap');
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
@@ -14,5 +12,114 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 500;
+    background-color: black;
+}
+
+.item{
+    padding: 5px;
+}
+
+.item-time {
+    position: relative;
+    align-self: start;
+    grid-column: 1 / -1;
+}
+
+.schedule-border {
+    background-color: #17181d;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.schedule {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px 1rem;
+    position: relative;
+    padding-left: 100px;
+}
+
+.time-container {
+    left: -90px;
+    right: 0px;
+    top: -17px;
+    position: absolute;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.time-text {
+    width: 64px;
+    height: 36px;
+    background: rgb(255, 255, 255);
+    border-radius: 42px;
+    color: #17181d;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.time-border {
+    border-top: 1px dashed rgb(255, 255, 255);
+    width: 100%;
+}
+
+.lesson {
+    background: rgba(31, 33, 40, 0.9);
+    border-radius: 20px;
+    padding: 15px;
+    text-align: left;
+    height: 100%;
+}
+
+.lesson-type {
+    width: 70px;
+    text-align: center;
+    color: #17181d;
+    font-weight: 600;
+    padding: 0px 10px 0px 10px;
+}
+
+.lecture {
+    background-color: #85C1E9;
+}
+
+.practice {
+    background-color: #FFD699;
+}
+
+.lesson-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+}
+
+.lesson-name {
+    font-weight: bold;
+}
+
+.lesson-teacher-icon {
+    width: 23px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.text-img-block {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.lesson-room {
+    margin: 0px;
 }
