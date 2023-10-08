@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ScheduleSumdu.Web.Data;
+using ScheduleSumdu.Web.Services;
+using ScheduleSumdu.Web.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +29,9 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders(); ;
 
+builder.Services.AddTransient<IHomeService, HomeService>();
+builder.Services.AddHttpClient<IHomeService, HomeService>();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
