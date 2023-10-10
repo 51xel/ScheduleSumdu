@@ -19,9 +19,9 @@ namespace ScheduleSumdu.Web.Controllers
         {
             var viewModel = new HomeIndexViewModel();
 
-            var result = await _homeService.GetListGroupsAsync(viewModel);
+            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
 
-            return View(result);
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
@@ -32,10 +32,14 @@ namespace ScheduleSumdu.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(HomeIndexViewModel viewModel)
         {
-            //TODO Load schedule 
+            if (ModelState.IsValid)
+            {
+                viewModel.Week = await _homeService.GetWeekAsync(viewModel.SelectedGroupName);
+            }
 
-            var result = await _homeService.GetListGroupsAsync(viewModel);
-            return View(result);
+            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
+
+            return View(viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

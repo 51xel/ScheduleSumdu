@@ -21,7 +21,7 @@ namespace ScheduleSumdu.Web.Services
             _logger = logger;
         }
 
-        public async Task<HomeIndexViewModel> GetListGroupsAsync(HomeIndexViewModel viewModel)
+        public async Task<Dictionary<string, string>?> GetListGroupsAsync()
         {
             Dictionary<string, string>? groups = null;
 
@@ -43,9 +43,51 @@ namespace ScheduleSumdu.Web.Services
                 }
             }
 
-            viewModel.ListGroups = groups;
+            return groups;
+        }
 
-            return viewModel;
+        public async Task<Week?> GetWeekAsync(string groupName)
+        {
+            var groups = await GetListGroupsAsync();
+            var groupId = groups.FirstOrDefault(x => x.Value == groupName);
+
+            if (groupId.Key == null || groupId.Value == null)
+            {
+                return null;
+            }
+
+            var now = DateTime.Now;
+            DateTime startOfWeek = now.AddDays(-(int)now.DayOfWeek + 1);
+
+            var result = await _httpClient.GetFromJsonAsync<List<Lesson>>(string.Format(
+                _configuration["URIGetSchedule"],
+                groupId.Key, startOfWeek.ToShortDateString(), 
+                startOfWeek.AddDays(5).ToShortDateString()
+                ));
+            var toReturn = new List<List<Lesson?>>();
+
+            int j = 0;
+            for (int i = 0; i < 6; i++)
+            {
+                toReturn.Add(new List<Lesson?>(new Lesson?[5]));
+                for (; j < result.Count && result[j].DATE_REG == startOfWeek.Date.AddDays(i).ToShortDateString(); j++)
+                {
+                    toReturn[i][Convert.ToInt32(result[j].NAME_PAIR[0].ToString()) - 1] = result[j];
+                }
+            }
+
+            var week = new Week();
+
+            for (int i = 0; i < 6; i++)
+            {
+                week.Days.Add(new Day()
+                {
+                    Date = startOfWeek.AddDays(i).ToString("dd.MM"),
+                    Lessons = toReturn[i]
+                });
+            }
+
+            return week;
         }
     }
 }

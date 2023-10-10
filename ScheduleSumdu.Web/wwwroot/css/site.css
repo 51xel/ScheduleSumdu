@@ -20,6 +20,7 @@ body {
 
 .item{
     padding: 5px;
+    min-height: 75px;
 }
 
 .item-time {

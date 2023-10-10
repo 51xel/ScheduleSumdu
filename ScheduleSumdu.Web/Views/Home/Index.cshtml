@@ -1,4 +1,5 @@
-﻿@model ScheduleSumdu.Web.Models.ViewModels.HomeIndexViewModel
+﻿@using ScheduleSumdu.Web.Models.ViewModels;
+@model ScheduleSumdu.Web.Models.ViewModels.HomeIndexViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -26,309 +27,81 @@
     <dev class="schedule">
         <div class="item">
             <p>Понеділок</p>
+            <p>@Model.Week?.Days[0].Date</p>
         </div>
         <div class="item">
             <p>Вівторок</p>
+            <p>@Model.Week?.Days[1].Date</p>
         </div>
         <div class="item">
             <p>Середа</p>
+            <p>@Model.Week?.Days[2].Date</p>
         </div>
         <div class="item">
             <p>Четвер</p>
+            <p>@Model.Week?.Days[3].Date</p>
         </div>
         <div class="item">
             <p>П'ятниця</p>
+            <p>@Model.Week?.Days[4].Date</p>
         </div>
         <div class="item">
             <p>Субота</p>
+            <p>@Model.Week?.Days[5].Date</p>
         </div>
-        <div class="item-time">
-            <div class="time-container">
-                <div class="time-text">8.30</div>
-                <div class="time-border"></div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item-time">
-            <div class="time-container">
-                <div class="time-text">10.05</div>
-                <div class="time-border"></div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-           <div class="lesson">
-               <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-           <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-           <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item-time">
-            <div class="time-container">
-                <div class="time-text">11.40</div>
-                <div class="time-border"></div>
-            </div>
-        </div>
-        <div class="item">
-           <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item-time">
-            <div class="time-container">
-                <div class="time-text">14.00</div>
-                <div class="time-border"></div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-           <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-           <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type lecture">
-                    <p>Лекція</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item-time">
-            <div class="time-container">
-                <div class="time-text">15.35</div>
-                <div class="time-border"></div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-        </div>
-        <div class="item">
-            <div class="lesson">
-                <div class="rounded lesson-type practice">
-                    <p>Лаб</p>
-                </div>
-                <p class="lesson-name lesson-text">Безпека польотів літальних апаратів</p>
-                <div class="text-img-block">
-                    <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-text">Архипов Олександр Генадійович</p>
-                </div>
-                <div class="text-img-block">
-                    <img src="~/icons/university.png" class="lesson-teacher-icon"/>
-                    <p class="lesson-room lesson-text">ТК-215</p>
-                </div>
-            </div>
-        </div>
-    </dev>
+
+        @{
+            if (@Model.Week != null)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    <div class="item-time">
+                        <div class="time-container">
+                            <div class="time-text">@HomeIndexViewModel.LessonTime[i]</div>
+                            <div class="time-border"></div>
+                        </div>
+                    </div>
+                    foreach (var day in @Model.Week.Days)
+                    {
+                        <div class="item">
+                        @{
+                            if (day.Lessons[i] != null)
+                            {
+                                <div class="lesson">
+                                    @{
+                                        if (day.Lessons[i].NAME_STUD == "лабораторне заняття")
+                                        {
+                                            <div class="rounded lesson-type practice">
+                                                <p>Лаб</p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="rounded lesson-type lecture">
+                                                <p>Лекція</p>
+                                            </div>
+                                        }
+
+                                        <p class="lesson-name lesson-text">@day.Lessons[i].NAME_DISC</p>
+
+                                        <div class="text-img-block">
+                                            <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
+                                            <p class="lesson-text">@day.Lessons[i].NAME_FIO</p>
+                                        </div>
+                                    }
+                                </div>
+                            }
+                        }
+                        </div>
+                    }
+                }
+            }
+        }
+
+        @*<div class="text-img-block">
+            <img src="~/icons/university.png" class="lesson-teacher-icon"/>
+            <p class="lesson-room lesson-text">ТК-215</p>
+        </div>*@
 </div>
 
 <script>
