@@ -20,6 +20,7 @@ body {
 
 .item{
     padding: 5px;
+    min-height: 75px;
 }
 
 .item-time {
@@ -32,7 +33,7 @@ body {
     background-color: #17181d;
     width: 100%;
     height: 100%;
-    padding: 20px;
+    padding: 10px;
     border-radius: 20px;
 }
 
@@ -122,4 +123,27 @@ body {
 
 .lesson-room {
     margin: 0px;
+}
+
+.select-group {
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.select-group p {
+    color: white;
+    font-size: 14px;
+    margin: 0px 10px 0px 0px;
+}
+
+.select-group-input {
+    background-color: rgb(54, 54, 55);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 10px;
+    font-size: 14px;
 }
