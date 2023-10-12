@@ -66,20 +66,17 @@ namespace ScheduleSumdu.Web.Services
                 ));
             var toReturn = new List<List<Lesson?>>();
 
+            var week = new Week();
+
             int j = 0;
             for (int i = 0; i < 6; i++)
             {
-                toReturn.Add(new List<Lesson?>(new Lesson?[5]));
+                toReturn.Add(new List<Lesson?>(new Lesson?[8]));
                 for (; j < result.Count && result[j].DATE_REG == startOfWeek.Date.AddDays(i).ToShortDateString(); j++)
                 {
                     toReturn[i][Convert.ToInt32(result[j].NAME_PAIR[0].ToString()) - 1] = result[j];
                 }
-            }
 
-            var week = new Week();
-
-            for (int i = 0; i < 6; i++)
-            {
                 week.Days.Add(new Day()
                 {
                     Date = startOfWeek.AddDays(i).ToString("dd.MM"),
