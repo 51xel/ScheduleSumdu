@@ -53,11 +53,11 @@
         @{
             if (@Model.Week != null)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 8; i++)
                 {
                     <div class="item-time">
                         <div class="time-container">
-                            <div class="time-text">@HomeIndexViewModel.LessonTime[i]</div>
+                            <div class="time-text">@Model.LessonTime[i]</div>
                             <div class="time-border"></div>
                         </div>
                     </div>
@@ -82,12 +82,18 @@
                                             </div>
                                         }
 
-                                        <p class="lesson-name lesson-text">@day.Lessons[i].NAME_DISC</p>
+                                        if (!string.IsNullOrWhiteSpace(day.Lessons[i].NAME_DISC))
+                                        {
+                                            <p class="lesson-name lesson-text">@day.Lessons[i].NAME_DISC</p>
+                                        }
 
-                                        <div class="text-img-block">
-                                            <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
-                                            <p class="lesson-text">@day.Lessons[i].NAME_FIO</p>
-                                        </div>
+                                        if(!string.IsNullOrWhiteSpace(day.Lessons[i].NAME_FIO))
+                                        {
+                                            <div class="text-img-block">
+                                                <img src="~/icons/proffesor.png" class="lesson-teacher-icon"/>
+                                                <p class="lesson-text">@day.Lessons[i].NAME_FIO</p>
+                                            </div>
+                                        }
                                     }
                                 </div>
                             }

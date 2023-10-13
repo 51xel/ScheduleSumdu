@@ -9,17 +9,19 @@ namespace ScheduleSumdu.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IHomeService _homeService;
+        private readonly IConfiguration _configuration;
 
-        public HomeController( IHomeService homeService)
+        public HomeController( IHomeService homeService, IConfiguration configuration)
         {
             _homeService = homeService;
+            _configuration = configuration;
         }
 
         public async Task<IActionResult> Index()
         {
             var viewModel = new HomeIndexViewModel();
 
-            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
+            viewModel = await PrepareStandartViewModelAsync(viewModel);
 
             return View(viewModel);
         }
@@ -37,7 +39,7 @@ namespace ScheduleSumdu.Web.Controllers
                 viewModel.Week = await _homeService.GetWeekAsync(viewModel.SelectedGroupName);
             }
 
-            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
+            viewModel = await PrepareStandartViewModelAsync(viewModel);
 
             return View(viewModel);
         }
@@ -46,6 +48,14 @@ namespace ScheduleSumdu.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private async Task<HomeIndexViewModel> PrepareStandartViewModelAsync(HomeIndexViewModel viewModel)
+        {
+            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
+            viewModel.LessonTime = _configuration.GetSection("LessonTimeArray").Get<string[]>();
+
+            return viewModel;
         }
     }
 }
