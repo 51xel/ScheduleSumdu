@@ -6,6 +6,7 @@
 
 <div class="select-group">
     <p>Виберіть групу:</p>
+
     <form id="selectGroupForm" asp-antiforgery="true">
         <input class="select-group-input" type="text" id="selectGroupInput" list="listGroups" autocomplete="off">
         <datalist id="listGroups">
@@ -20,6 +21,10 @@
             }
         </datalist>
     </form>
+
+    <div id="loading" class="select-group-loading">
+        <img src="gifs/loading.gif"/>
+    </div>
 </div>
 
 <div class="schedule-border text-light text-center">
@@ -39,6 +44,7 @@
                 var selectedGroup = $(this).val();
                 
                 if(selectedGroup != null && selectedGroup.trim() != ""){
+                    $('#loading').show();
                     $.ajax({
                         type: "POST",
                         url: "Home/GetWeek",
@@ -50,6 +56,9 @@
                         },
                         error: function (xhr, status, error) {
                             console.log('Error:', error);
+                        },
+                        complete: function () {
+                            $('#loading').hide();
                         }
                     });
                 }

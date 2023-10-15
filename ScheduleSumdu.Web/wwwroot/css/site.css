@@ -147,3 +147,12 @@ body {
     padding: 10px;
     font-size: 14px;
 }
+
+.select-group-loading {
+    display: none;
+}
+
+.select-group-loading img {
+    width: 25px;
+    margin-left: 10px;
+}
