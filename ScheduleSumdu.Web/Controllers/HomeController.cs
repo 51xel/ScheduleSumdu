@@ -17,11 +17,11 @@ namespace ScheduleSumdu.Web.Controllers
             _configuration = configuration;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> IndexAsync()
         {
             var viewModel = new HomeIndexViewModel();
 
-            viewModel = await PrepareStandartViewModelAsync(viewModel);
+            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
 
             return View(viewModel);
         }
@@ -32,30 +32,32 @@ namespace ScheduleSumdu.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(HomeIndexViewModel viewModel)
+        public async Task<IActionResult> GetWeekAsync(string selectedGroupName)
         {
             if (ModelState.IsValid)
             {
-                viewModel.Week = await _homeService.GetWeekAsync(viewModel.SelectedGroupName);
+                var getWeekViewModel = new HomeGetWeekViewModel();
+
+                var result = await _homeService.GetWeekAsync(selectedGroupName);
+
+                if (result == null)
+                {
+                    return NoContent();
+                }
+
+                getWeekViewModel.Week = result;
+                getWeekViewModel.LessonTime = _configuration.GetSection("LessonTimeArray").Get<string[]>();
+
+                return PartialView("_GetWeekPartial", getWeekViewModel);
             }
 
-            viewModel = await PrepareStandartViewModelAsync(viewModel);
-
-            return View(viewModel);
+            return RedirectToAction("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        private async Task<HomeIndexViewModel> PrepareStandartViewModelAsync(HomeIndexViewModel viewModel)
-        {
-            viewModel.ListGroups = await _homeService.GetListGroupsAsync();
-            viewModel.LessonTime = _configuration.GetSection("LessonTimeArray").Get<string[]>();
-
-            return viewModel;
         }
     }
 }
