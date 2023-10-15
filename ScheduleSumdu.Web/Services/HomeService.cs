@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using ScheduleSumdu.Web.Models;
-using ScheduleSumdu.Web.Models.ViewModels;
 using ScheduleSumdu.Web.Services.IServices;
-using System.Net.Http.Json;
 
 namespace ScheduleSumdu.Web.Services
 {
