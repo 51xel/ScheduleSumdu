@@ -4,65 +4,147 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="select-group">
-    <p>Виберіть групу:</p>
-
-    <form id="selectGroupForm" asp-antiforgery="true">
-        <input class="select-group-input" type="text" id="selectGroupInput" list="listGroups" autocomplete="off">
-        <datalist id="listGroups">
-            @{
-                if (Model.ListGroups != null)
-                {
-                    foreach(var option in Model.ListGroups)
+<div style="display: flex; margin-bottom: 10px;">
+    <div class="next-week-div">
+        <button id="previous-button" class="next-week-button"><</button>
+    </div>
+    
+    <div class="select-group">
+        <p>Виберіть групу:</p>
+        <form id="selectGroupForm" asp-antiforgery="true">
+            <input class="select-group-input" type="text" id="selectGroupInput" list="listGroups" autocomplete="off">
+            <datalist id="listGroups">
+                @{
+                    if (Model.ListGroups != null)
                     {
-                        <option value="@option.Value"></option>  
+                        foreach(var option in Model.ListGroups)
+                        {
+                            <option value="@option.Value"></option>  
+                        }
                     }
                 }
-            }
-        </datalist>
-    </form>
-
-    <div id="loading" class="select-group-loading">
-        <img src="gifs/loading.gif"/>
+            </datalist>
+        </form>
+      
+        <div id="loading" class="select-group-loading">
+            <img src="gifs/loading.gif"/>
+        </div>
+    </div>
+      
+    <div class="next-week-div">
+        <button id="next-button" class="next-week-button">></button>
     </div>
 </div>
 
+
 <div class="schedule-border text-light text-center">
-    <dev id="schedule" class="schedule">
-    </dev>
+    <dev id="schedule" class="schedule"></dev>
 </div>
 
 @section Scripts{
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            var currentWeek = 0;
+
             $('#selectGroupForm').on('submit', function (e) {
                 e.preventDefault();
             });
 
             $('#selectGroupInput').on('change', function () {
                 var selectedGroup = $(this).val();
-                
-                if(selectedGroup != null && selectedGroup.trim() != ""){
-                    $('#loading').show();
-                    $.ajax({
-                        type: "POST",
-                        url: "Home/GetWeek",
-                        data: {
-                            SelectedGroupName: selectedGroup
-                        },
-                        success: function (data) {
-                            $('#schedule').html(data);
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error:', error);
-                        },
-                        complete: function () {
-                            $('#loading').hide();
-                        }
-                    });
+
+                currentWeek = 0;
+
+                makeRequest(selectedGroup, currentWeek);
+            });
+            
+            $('#previous-button').click(function (){
+                var selectedGroup = $('#selectGroupInput').val();
+
+                if(currentWeek === 1){
+                    currentWeek = 0;
                 }
+                else{
+                    currentWeek = -1;
+                }
+
+                makeRequest(selectedGroup, currentWeek);
+            });
+
+            $('#next-button').click(function (){
+                var selectedGroup = $('#selectGroupInput').val();
+                
+                if(currentWeek === -1){
+                    currentWeek = 0;
+                }
+                else{
+                    currentWeek = 1;
+                }
+
+                makeRequest(selectedGroup, currentWeek);
             });
         });
+
+        function makeRequest(selectedGroup, skip) {
+            if(selectedGroup != null && selectedGroup.trim() != ""){
+                $('#loading').show();
+                $.ajax({
+                    type: "POST",
+                    url: "Home/GetWeek",
+                    data: {
+                        SelectedGroupName: selectedGroup,
+                        Skip: skip
+                    },
+                    success: function (data) {
+                        $('#schedule').html(data);
+
+                        switch (skip) {
+                            case 0:
+                                $('#next-button').show();
+                                $('#previous-button').show();
+
+
+                                $('#next-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#previous-button').css({
+                                    'box-shadow': 'none'
+                                });
+                                break;
+                            case 1:
+                                $('#next-button').hide();
+                                $('#next-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#previous-button').css({
+                                    'box-shadow': '0px 0px 30px white'
+                                });
+                                break;
+                            case -1:
+                                $('#previous-button').hide();
+                                $('#previous-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#next-button').css({
+                                    'box-shadow': '0px 0px 30px white'
+                                });
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', error);
+                    },
+                    complete: function () {
+                        $('#loading').hide();
+                    }
+                });
+            }
+        }
     </script>
 }
