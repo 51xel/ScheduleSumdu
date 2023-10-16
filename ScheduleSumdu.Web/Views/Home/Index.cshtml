@@ -25,8 +25,12 @@
                 }
             </datalist>
         </form>
+      
+        <div id="loading" class="select-group-loading">
+            <img src="gifs/loading.gif"/>
+        </div>
     </div>
-
+      
     <div class="next-week-div">
         <button id="next-button" class="next-week-button">></button>
     </div>
@@ -57,7 +61,7 @@
             
             $('#previous-button').click(function (){
                 var selectedGroup = $('#selectGroupInput').val();
-                
+
                 if(currentWeek === 1){
                     currentWeek = 0;
                 }
@@ -84,6 +88,7 @@
 
         function makeRequest(selectedGroup, skip) {
             if(selectedGroup != null && selectedGroup.trim() != ""){
+                $('#loading').show();
                 $.ajax({
                     type: "POST",
                     url: "Home/GetWeek",
@@ -134,6 +139,9 @@
                     },
                     error: function (xhr, status, error) {
                         console.log('Error:', error);
+                    },
+                    complete: function () {
+                        $('#loading').hide();
                     }
                 });
             }

@@ -147,6 +147,15 @@ body {
     font-size: 14px;
 }
 
+.select-group-loading {
+    display: none;
+}
+
+.select-group-loading img {
+    width: 25px;
+    margin-left: 10px;
+}
+
 .next-week-button {
     width: 30px;
     height: 30px;
