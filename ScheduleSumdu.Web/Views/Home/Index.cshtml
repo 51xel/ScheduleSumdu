@@ -6,7 +6,7 @@
 
 <div style="display: flex; margin-bottom: 10px;">
     <div class="next-week-div">
-        <button class="next-week-button"><</button>
+        <button id="previous-button" class="next-week-button"><</button>
     </div>
     
     <div class="select-group">
@@ -28,7 +28,7 @@
     </div>
 
     <div class="next-week-div">
-        <button class="next-week-button">></button>
+        <button id="next-button" class="next-week-button">></button>
     </div>
 </div>
 
@@ -41,29 +41,102 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
+            var currentWeek = 0;
+
             $('#selectGroupForm').on('submit', function (e) {
                 e.preventDefault();
             });
 
             $('#selectGroupInput').on('change', function () {
                 var selectedGroup = $(this).val();
+
+                currentWeek = 0;
+
+                makeRequest(selectedGroup, currentWeek);
+            });
+            
+            $('#previous-button').click(function (){
+                var selectedGroup = $('#selectGroupInput').val();
                 
-                if(selectedGroup != null && selectedGroup.trim() != ""){
-                    $.ajax({
-                        type: "POST",
-                        url: "Home/GetWeek",
-                        data: {
-                            SelectedGroupName: selectedGroup
-                        },
-                        success: function (data) {
-                            $('#schedule').html(data);
-                        },
-                        error: function (xhr, status, error) {
-                            console.log('Error:', error);
-                        }
-                    });
+                if(currentWeek === 1){
+                    currentWeek = 0;
                 }
+                else{
+                    currentWeek = -1;
+                }
+
+                makeRequest(selectedGroup, currentWeek);
+            });
+
+            $('#next-button').click(function (){
+                var selectedGroup = $('#selectGroupInput').val();
+                
+                if(currentWeek === -1){
+                    currentWeek = 0;
+                }
+                else{
+                    currentWeek = 1;
+                }
+
+                makeRequest(selectedGroup, currentWeek);
             });
         });
+
+        function makeRequest(selectedGroup, skip) {
+            if(selectedGroup != null && selectedGroup.trim() != ""){
+                $.ajax({
+                    type: "POST",
+                    url: "Home/GetWeek",
+                    data: {
+                        SelectedGroupName: selectedGroup,
+                        Skip: skip
+                    },
+                    success: function (data) {
+                        $('#schedule').html(data);
+
+                        switch (skip) {
+                            case 0:
+                                $('#next-button').show();
+                                $('#previous-button').show();
+
+
+                                $('#next-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#previous-button').css({
+                                    'box-shadow': 'none'
+                                });
+                                break;
+                            case 1:
+                                $('#next-button').hide();
+                                $('#next-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#previous-button').css({
+                                    'box-shadow': '0px 0px 30px white'
+                                });
+                                break;
+                            case -1:
+                                $('#previous-button').hide();
+                                $('#previous-button').css({
+                                    'box-shadow': 'none'
+                                });
+
+                                $('#next-button').css({
+                                    'box-shadow': '0px 0px 30px white'
+                                });
+                                break;
+                            default:
+                                break;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error:', error);
+                    }
+                });
+            }
+        }
     </script>
 }

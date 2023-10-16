@@ -44,7 +44,7 @@ namespace ScheduleSumdu.Web.Services
             return groups;
         }
 
-        public async Task<Week?> GetWeekAsync(string groupName)
+        public async Task<Week?> GetWeekAsync(string groupName, int skip)
         {
             var groups = await GetListGroupsAsync();
             var groupId = groups.FirstOrDefault(x => x.Value == groupName);
@@ -55,7 +55,7 @@ namespace ScheduleSumdu.Web.Services
             }
 
             var now = DateTime.Now;
-            DateTime startOfWeek = now.AddDays(-(int)now.DayOfWeek + 1);
+            DateTime startOfWeek = now.AddDays((-(int)now.DayOfWeek + skip * 7 + 1));
 
             var result = await _httpClient.GetFromJsonAsync<List<Lesson>>(string.Format(
                 _configuration["URIGetSchedule"],
