@@ -6,6 +6,6 @@ namespace ScheduleSumdu.Web.Services.IServices
     public interface IHomeService
     {
         public Task<Dictionary<string, string>> GetListGroupsAsync();
-        public Task<Week?> GetWeekAsync(string groupName);
+        public Task<Week?> GetWeekAsync(string groupName, int skip);
     }
 }

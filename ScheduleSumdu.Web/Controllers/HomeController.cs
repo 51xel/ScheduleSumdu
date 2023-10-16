@@ -32,13 +32,13 @@ namespace ScheduleSumdu.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetWeekAsync(string selectedGroupName)
+        public async Task<IActionResult> GetWeekAsync(string selectedGroupName, int skip)
         {
             if (ModelState.IsValid)
             {
                 var getWeekViewModel = new HomeGetWeekViewModel();
 
-                var result = await _homeService.GetWeekAsync(selectedGroupName);
+                var result = await _homeService.GetWeekAsync(selectedGroupName, skip);
 
                 if (result == null)
                 {
