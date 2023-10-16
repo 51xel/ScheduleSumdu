@@ -4,27 +4,37 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="select-group">
-    <p>Виберіть групу:</p>
-    <form id="selectGroupForm" asp-antiforgery="true">
-        <input class="select-group-input" type="text" id="selectGroupInput" list="listGroups" autocomplete="off">
-        <datalist id="listGroups">
-            @{
-                if (Model.ListGroups != null)
-                {
-                    foreach(var option in Model.ListGroups)
+<div style="display: flex; margin-bottom: 10px;">
+    <div class="next-week-div">
+        <button class="next-week-button"><</button>
+    </div>
+    
+    <div class="select-group">
+        <p>Виберіть групу:</p>
+        <form id="selectGroupForm" asp-antiforgery="true">
+            <input class="select-group-input" type="text" id="selectGroupInput" list="listGroups" autocomplete="off">
+            <datalist id="listGroups">
+                @{
+                    if (Model.ListGroups != null)
                     {
-                        <option value="@option.Value"></option>  
+                        foreach(var option in Model.ListGroups)
+                        {
+                            <option value="@option.Value"></option>  
+                        }
                     }
                 }
-            }
-        </datalist>
-    </form>
+            </datalist>
+        </form>
+    </div>
+
+    <div class="next-week-div">
+        <button class="next-week-button">></button>
+    </div>
 </div>
 
+
 <div class="schedule-border text-light text-center">
-    <dev id="schedule" class="schedule">
-    </dev>
+    <dev id="schedule" class="schedule"></dev>
 </div>
 
 @section Scripts{
